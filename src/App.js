@@ -5,11 +5,11 @@ import api from './services/api'
 import "./styles.css";
 
 function App() {
-const [repositories, setRepositories] = useState([]);
+const [repositories, setrepositories] = useState([]);
 
   useEffect(() => {
     api.get('repositories').then(response => {
-        setRepositories(response.data);
+        setrepositories(response.data);
     });
   }, []);
 
@@ -21,16 +21,16 @@ const [repositories, setRepositories] = useState([]);
       techs : "NodeJS"
     });
 
-    const repositorie = response.data; 
+    const repository = response.data; 
 
-    setRepositories([...repositories, repositorie]);
+    setrepositories([...repositories, repository]);
   }
 
   async function handleRemoveRepository(id) {
     await api.delete(`repositories/${id}`);
 
-    setRepositories(repositories.filter(
-      repositorie => repositorie.id != id
+    setrepositories(repositories.filter(
+      repository => repository.id != id
     ) )
   }
 
@@ -38,11 +38,11 @@ const [repositories, setRepositories] = useState([]);
     
     <div>
       <ul data-testid="repository-list">
-        {repositories.map(repositorie => (
-          <li key = {repositorie.id}>
-            {repositorie.title}
+        {repositories.map(repository => (
+          <li key = {repository.id}>
+            {repository.title}
         
-            <button onClick={() => handleRemoveRepository(repositorie.id)}>
+            <button onClick={() => handleRemoveRepository(repository.id)}>
               Remover
             </button>
           </li>
